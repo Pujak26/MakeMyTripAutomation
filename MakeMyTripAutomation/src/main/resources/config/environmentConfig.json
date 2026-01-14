@@ -1,0 +1,28 @@
+{
+  "defaultEnv" : "QA",	
+	
+   "environment" :
+   {
+	  
+	           "QA" : {
+				   "browserName" : "chrome",
+				   "baseUrl" : "https://www.makemytrip.com/",
+				   "username": "automationtesting2026@gmail.com",
+				   "password": "Makemytrip@2026" 
+			  },
+			  
+			  "Stage" : {
+				   "browserName" : "chrome",
+				   "baseUrl" : "https://www.makemytrip.com/",
+				   "username": "automationtesting2026@gmail.com",
+				   "password": "Makemytrip@2026" 
+			   },
+			   
+			  "Prod" : {
+				   "browserName" : "chrome",
+   				   "baseUrl" : "https://www.makemytrip.com/",
+   				   "username": "automationtesting2026@gmail.com",
+   				   "password": "Makemytrip@2026" 
+			   	} 
+   }	 
+}

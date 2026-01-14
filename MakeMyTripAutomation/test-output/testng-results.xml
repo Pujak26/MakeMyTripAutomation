@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="3" passed="0" failed="3" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-01-13T20:03:01 IST" name="Default suite" finished-at="2026-01-13T20:10:46 IST" duration-ms="465367">
+    <groups>
+      <group name="cucumber">
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runner.TestRunner@76b07f29]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+      </group> <!-- cucumber -->
+    </groups>
+    <test started-at="2026-01-13T20:03:01 IST" name="Default test" finished-at="2026-01-13T20:10:46 IST" duration-ms="465367">
+      <class name="runner.TestRunner">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:runner.TestRunner@76b07f29]" started-at="2026-01-13T20:03:01 IST" name="setUpClass" finished-at="2026-01-13T20:03:01 IST" duration-ms="259" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@4ed15347]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpClass -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runner.TestRunner@76b07f29]" started-at="2026-01-13T20:03:01 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-01-13T20:03:26 IST" duration-ms="24522" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify user can book train tickets."]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["To verify trains tab."]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.openqa.selenium.StaleElementReferenceException">
+            <message>
+              <![CDATA[stale element reference: stale element not found in the current frame
+  (Session info: chrome=143.0.7499.193)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#staleelementreferenceexception
+Build info: version: '4.39.0', revision: '126f156aee'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [9335d39620f7197e153b3f2cb6c19f2b, getElementAttribute {id=f.CF7A653DF5B13E519724803A73455F5F.d.4736A8CA6EC8FDB2DD03070B4041ABA8.e.512, name=class}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.193, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: C:\Users\pujak\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:57049}, goog:processID: 17592, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:57049/devtoo..., se:cdpVersion: 143.0.7499.193, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (9335d39620f7197e153b3f2cb6c19f2b)] -> xpath: //div[@aria-label='Sun Jan 18 2026']]
+Session ID: 9335d39620f7197e153b3f2cb6c19f2b]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.StaleElementReferenceException: stale element reference: stale element not found in the current frame
+  (Session info: chrome=143.0.7499.193)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#staleelementreferenceexception
+Build info: version: '4.39.0', revision: '126f156aee'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [9335d39620f7197e153b3f2cb6c19f2b, getElementAttribute {id=f.CF7A653DF5B13E519724803A73455F5F.d.4736A8CA6EC8FDB2DD03070B4041ABA8.e.512, name=class}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.193, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: C:\Users\pujak\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:57049}, goog:processID: 17592, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:57049/devtoo..., se:cdpVersion: 143.0.7499.193, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (9335d39620f7197e153b3f2cb6c19f2b)] -> xpath: //div[@aria-label='Sun Jan 18 2026']]
+Session ID: 9335d39620f7197e153b3f2cb6c19f2b
+at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:142)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:561)
+at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
+at org.openqa.selenium.remote.RemoteWebElement.getAttribute(RemoteWebElement.java:149)
+at pom.Book_HomePage.selectAndVerifyJourneyDateFromCalender(Book_HomePage.java:144)
+at stepDef.TrainStepDef.select_Travel_Date(TrainStepDef.java:92)
+at ✽.User select the travel date 5 days from today(file:///C:/Users/pujak/eclipse-workspace/MakeMyTripAutomation/src/test/resources/features/TrainBooking.feature:10)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.StaleElementReferenceException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runner.TestRunner@76b07f29]" started-at="2026-01-13T20:03:26 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-01-13T20:07:05 IST" duration-ms="219787" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify user can check PNR status."]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["To verify trains tab."]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.openqa.selenium.TimeoutException">
+            <message>
+              <![CDATA[java.util.concurrent.TimeoutException
+Build info: version: '4.39.0', revision: '126f156aee'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [6eaaa6674b6125dafd35211c5e7cedcd, findElement {value=//input[@id='pnr'], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.193, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: C:\Users\pujak\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:50066}, goog:processID: 22756, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:50066/devtoo..., se:cdpVersion: 143.0.7499.193, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 6eaaa6674b6125dafd35211c5e7cedcd]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.TimeoutException: java.util.concurrent.TimeoutException
+Build info: version: '4.39.0', revision: '126f156aee'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [6eaaa6674b6125dafd35211c5e7cedcd, findElement {value=//input[@id='pnr'], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.193, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: C:\Users\pujak\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:50066}, goog:processID: 22756, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:50066/devtoo..., se:cdpVersion: 143.0.7499.193, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 6eaaa6674b6125dafd35211c5e7cedcd
+at org.openqa.selenium.remote.http.jdk.JdkHttpClient.execute(JdkHttpClient.java:428)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:212)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:561)
+at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:166)
+at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:384)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:378)
+at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
+at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+at jdk.proxy2/jdk.proxy2.$Proxy25.sendKeys(Unknown Source)
+at pom.PNR_HomePage.enterPnrNumber(PNR_HomePage.java:102)
+at stepDef.TrainStepDef.enter_PNR_Number(TrainStepDef.java:213)
+at ✽.User enter valid PNR number in PNR number input field as "8742655436"(file:///C:/Users/pujak/eclipse-workspace/MakeMyTripAutomation/src/test/resources/features/TrainBooking.feature:30)
+Caused by: java.util.concurrent.TimeoutException
+at java.base/java.util.concurrent.CompletableFuture$Timeout.run(CompletableFuture.java:2920)
+at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+at java.base/java.lang.Thread.run(Thread.java:1583)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runner.TestRunner@76b07f29]" started-at="2026-01-13T20:07:06 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-01-13T20:10:46 IST" duration-ms="220663" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify user can live train status."]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["To verify trains tab."]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.openqa.selenium.TimeoutException">
+            <message>
+              <![CDATA[java.util.concurrent.TimeoutException
+Build info: version: '4.39.0', revision: '126f156aee'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [9f037ead12942432913ccc46b248b5d3, findElement {value=(//div[@class='tp-dt-header-icon'])[2], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.193, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: C:\Users\pujak\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:64155}, goog:processID: 25316, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:64155/devtoo..., se:cdpVersion: 143.0.7499.193, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 9f037ead12942432913ccc46b248b5d3]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.TimeoutException: java.util.concurrent.TimeoutException
+Build info: version: '4.39.0', revision: '126f156aee'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [9f037ead12942432913ccc46b248b5d3, findElement {value=(//div[@class='tp-dt-header-icon'])[2], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 143.0.7499.193, chrome: {chromedriverVersion: 143.0.7499.192 (be2c1f4fd45..., userDataDir: C:\Users\pujak\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:64155}, goog:processID: 25316, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:64155/devtoo..., se:cdpVersion: 143.0.7499.193, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 9f037ead12942432913ccc46b248b5d3
+at org.openqa.selenium.remote.http.jdk.JdkHttpClient.execute(JdkHttpClient.java:428)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:212)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:561)
+at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:166)
+at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:384)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:378)
+at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
+at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+at jdk.proxy2/jdk.proxy2.$Proxy25.click(Unknown Source)
+at pom.Live_HomePage.clickAiPopUp(Live_HomePage.java:68)
+at stepDef.TrainStepDef.vanish_Ai_Popup(TrainStepDef.java:279)
+at ✽.User vanish Ai popup(file:///C:/Users/pujak/eclipse-workspace/MakeMyTripAutomation/src/test/resources/features/TrainBooking.feature:42)
+Caused by: java.util.concurrent.TimeoutException
+at java.base/java.util.concurrent.CompletableFuture$Timeout.run(CompletableFuture.java:2920)
+at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+at java.base/java.lang.Thread.run(Thread.java:1583)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:runner.TestRunner@76b07f29]" started-at="2026-01-13T20:10:46 IST" name="tearDownClass" finished-at="2026-01-13T20:10:46 IST" duration-ms="3" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownClass -->
+      </class> <!-- runner.TestRunner -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
