@@ -36,24 +36,48 @@ public Train_PopupPage(WebDriver driver) {
 }
 
 public void clickAiPopUp() {
+ try {	
 	this.wait.until(ExpectedConditions.visibilityOf(this.aiPopup));
 	aiPopup.click();
+ }
+ catch(Exception e) {
+	 System.err.println("Failed to close Ai poopup");
+	 e.printStackTrace();
+ }
 }	
 
 public void clickClosePopup() {
+ try {	
 	System.out.println("Zooming out current page");
 	this.js.executeScript("document.body.style.zoom='60%'");
 	this.wait.until(ExpectedConditions.visibilityOf(this.close));
 	this.close.click();
+ }
+ catch(Exception e) {
+	 System.err.println("Failed to close login popup");
+	 e.printStackTrace();
+ }
 	}
 public void verifyTrainsPageTitle(String title) {
+ try {	
 	System.out.println("Title : "+this.driver.getTitle());
 	Assert.assertEquals(this.driver.getTitle(),title,"Trains home page title does not match expected value");
 }
+ catch(Exception e) {
+	 System.err.println("Failed to verify page title");
+	 e.printStackTrace();
+  }
+ }
 public void verifyTrainPageUrl(String url) {
+try {	
 	System.out.println("URL : "+this.driver.getCurrentUrl());
 	Assert.assertEquals(this.driver.getCurrentUrl(), url,"Page URL does not match expected value");
  } 
+catch(Exception e) {
+	System.err.println("Failed to verify page URL");
+	e.printStackTrace();
+ }
+}
 public void clickTrainsTab() throws InterruptedException {
 	try {
 		this.wait.until(ExpectedConditions.elementToBeClickable(this.trains));

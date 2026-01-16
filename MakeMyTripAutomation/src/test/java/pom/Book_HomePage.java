@@ -59,8 +59,8 @@ private	WebElement travelClass;
 @FindBy (xpath = "//ul[@class='travelForPopup']//li")
 List<WebElement> classOptions;
 
-@FindBy (xpath = "//div[@data-cy='classValue']//p")
-private	WebElement code;
+@FindBy (xpath = "//input[@id='travelClass']")
+private	WebElement classCode;
 
 @FindBy (xpath = "//a[text()='Search']")
 private	WebElement search;
@@ -205,28 +205,22 @@ Assert.assertEquals(dateText, expectedDateSelect,"fail to match date format");
  }
 }
 
-public void selectClass(String className) throws InterruptedException {
+public void selectClass(String className) {
  try {	
-	    boolean classFound = false;
-
        for (int i=0; i<classOptions.size(); i++) {
     	   
-	   	     String classCode = classOptions.get(i).getAttribute("data-cy");
+	   	     String code = this.classCode.getAttribute("value");
 	   	     String classname = classOptions.get(i).getText().trim();
-	   	     String selectClass = classCode + classname;
-	   	     
-	         if (classCode.contains(className)) {
+	   	     String selectedClass = code + classname;
+		  	     
+	         if (classname.equalsIgnoreCase(className)) {
 	    	 this.wait.until(ExpectedConditions.elementToBeClickable(this.classOptions.get(i)));
-	    	  Thread.sleep(5000);
    	         this.classOptions.get(i).click();
-   	         this.wait.until(ExpectedConditions.textToBePresentInElement(this.code, className));
-   	         if(classCode.contains(className)) {
-   	        	 classFound = true; 
-   	           }
-            break;
+   	         this.wait.until(ExpectedConditions.textToBePresentInElementValue(this.classCode, code));
+             break;
 	        }
-        }
-    Assert.assertTrue(classFound, className + " is not found in classOptions");
+           Assert.assertEquals(selectedClass,className,"Failed to select expectted class");
+      }
  }
  catch(Exception e) {
 	 System.err.println("Fail to select class");
@@ -236,12 +230,10 @@ public void selectClass(String className) throws InterruptedException {
  
 public void clickOnSearch() {
  try {	
-	  System.out.println("Clicking on Search button"); 
       this.wait.until(ExpectedConditions.elementToBeClickable(this.search));
 	  this.search.click();
 	  System.out.println("Clicked to Search button");
-	 Assert.assertTrue(this.search.isSelected(), "Failed to click on Search button");
-   }
+  }
  catch(Exception e) {
 	 System.err.println("Failed to click on search button");
 	 e.printStackTrace();

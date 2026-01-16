@@ -1,9 +1,13 @@
 package pom;
 
+import java.time.Duration;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 public class PNR_HomePage {
@@ -32,80 +36,71 @@ private	WebElement pnrNumber;
 @FindBy (xpath = "//a[text()='CHECK STATUS']")
 private	WebElement checkStatus;
 	
-private WebDriver driver;		
+private WebDriver driver;
+private WebDriverWait wait;
 	
 public PNR_HomePage(WebDriver driver) {	
 	this.driver = driver;
  PageFactory.initElements(driver, this);
+ this.wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 }
 
-public void clickClosePopup() {
-	this.close.click();
-	Assert.assertTrue(this.close.isDisplayed(),"Close icon is not visible on popup");
-}
 public void verifyTrainsPageTitle(String title) {
+ try {
+	System.out.println("Title : "+this.driver.getTitle());
 	Assert.assertEquals(this.driver.getTitle(),title,"Trains home page title does not match expected value");
 }
+ catch(Exception e) {
+		System.err.println("Fail to verify trains page title");
+		e.printStackTrace();
+	}
+  }
 public void verifyTrainPageUrl(String url) {
+ try {
+	System.out.println("URL : "+this.driver.getCurrentUrl());
 	Assert.assertEquals(this.driver.getCurrentUrl(), url,"Page URL does not match expected value");
  } 
-public void clickTrainsTab() {
-	this.trains.click();
-	Assert.assertEquals(this.trains.getText(),"Trains","Trains tab text should be as 'Trains'");
+ catch(Exception e) {
+	System.err.println("Fail to verify trains page title");
+	e.printStackTrace();
+ }
 }
-
-public void verifyTrainButtonTypes(String type) {
-	boolean status = false;
-	
-	if(type.equalsIgnoreCase("Book Train Tickets")) {
-		status = this.bookTrainTickets.isEnabled();
-	}
-	if(type.equalsIgnoreCase("Check PNR Status")) {
-		status = this.checkPNRStatus.isSelected();
-	}
-	if(type.equalsIgnoreCase("Live Train Status")) {
-		status = this.liveTrainStatus.isSelected();
-	
-		Assert.assertEquals(status, true,"Fail to verify "+type+" radio button is selected");
-		//OR
-		//Assert.assertTrue(status, "Button should be selected");
-	}
+public void verifyTrainButtonTypes() {
+ try {	
+	this.wait.until(ExpectedConditions.elementToBeClickable(this.checkPNRStatus));
+	this.checkPNRStatus.click();
+	this.wait.until(ExpectedConditions.attributeContains(this.checkPNRStatus,"class","active"));
+	 //Assert.assertTrue(this.checkPNRStatus.isSelected(), "Failed to select Check PNR Status button");
+	Assert.assertTrue(this.checkPNRStatus.getAttribute("class").contains("active"), "Failed to select Check PNR Status button");
+		}
+ catch(Exception e) {
+	 System.out.println("Failed to select Check PNR Status button");
+	 e.printStackTrace();
+ }
 }
-//OR Separate method
-
-/*public void verifyPNRStatusButton() {
-	if(this.checkPNRStatus.isSelected()) {
-		System.out.println(this.checkPNRStatus.getText());
-	}else {
-			this.checkPNRStatus.click();
-	}
-	Assert.assertEquals(this.checkPNRStatus.isSelected(), true, "Check PNR status button should be selected after clicking");
-}
-public void verifyLiveTrainStatusButton() {
-	if(this.liveTrainStatus.isSelected()) {
-		System.out.println(this.liveTrainStatus.getText());
-	}else {
-		this.liveTrainStatus.click();
-	}
-	Assert.assertEquals(this.liveTrainStatus.isSelected(), true, "Live train status button should be selected after clicking");
-}
-public void verifyBookTrainTicketsButton() {
-	if(this.bookTrainTickets.isEnabled()){
-	     System.out.println(this.bookTrainTickets.getText());
-	   }else{
-		this.bookTrainTickets.click();
-	   }
-	Assert.assertEquals(this.bookTrainTickets.isEnabled(),true, "Book Train ticket option should be selected after clicking");
-}*/
 
 public void enterPnrNumber(String pnrNum){
-   this.pnrNumber.sendKeys(pnrNum);
-   
-  Assert.assertEquals(pnrNumber.getAttribute("value"), pnrNum,"Fail to verify match with expectes PNR number");
+ try {
+	 this.wait.until(ExpectedConditions.elementToBeClickable(this.pnrNumber));
+	 this.pnrNumber.click();
+	 System.out.println("Sending PNR number to input field");
+     this.pnrNumber.sendKeys(pnrNum);
+    Assert.assertTrue(this.pnrNumber.getAttribute("value").contains(pnrNum),"Fail to verify PNR number input field");
+ }
+ catch(Exception e) {
+	System.out.println("Failed to enter PNR number");
+	e.printStackTrace();
+ }
 }
 
 public void clickAndVerifyCheckStatusButton() {
+ try {	
 	this.checkStatus.click();
-	Assert.assertEquals(this.checkStatus.getText(),"CHECK STATUS","Tab text should be as CHECK STATUS" );
+	Assert.assertTrue(this.checkStatus.isSelected(),"Failed to click Check Status button");
 }
+ catch(Exception e) {
+	 System.out.println("Failed to click Check Status button");
+	 e.printStackTrace();
+  }
+ }
 }

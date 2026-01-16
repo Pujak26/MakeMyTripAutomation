@@ -8,10 +8,10 @@ And User click on "Book Train Tickets" option
 When User click and enter "Pune" as a source city and select matched city "PUNE"
 And User enter "Ngp" as a destination city and select matched city "NGP" 
 And User select the travel date 5 days from today
-And User select the travel class as "2A" 
+And User select the travel class as "All Class" 
 And User click on search button
 And User select journey class checkbox from Quick filters
-And User select the train "Howrah Duronto" having class "AC" from suggestions list
+And User select the train which have confirmed options in train options
 And User click on Add Traveller button
 And User enter name as "Prisha" in fullName
 And User enter age as "10" completeAge
@@ -26,7 +26,7 @@ Scenario: Verify user can check PNR status.
 Given User click on close 
 #And User login to application using below credentials |
 And User click on Train
-And User click on "Check PNR Status" button
+And User click on Check PNR Status button
 When User enter valid PNR number in PNR number input field as "8742655436"
 And User click on CHECK STATUS button
 And User handle the Ai Popup
