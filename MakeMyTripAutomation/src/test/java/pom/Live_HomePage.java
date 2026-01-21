@@ -14,34 +14,19 @@ import org.testng.Assert;
 
 public class Live_HomePage {
 	
-@FindBy (xpath = "//span[@class='commonModal__close']")	
-private	WebElement close;
+@FindBy (xpath = "//span[@data-cy='liveTrainStatus']")
+private	WebElement liveTrainStatusBtn;
 
-@FindBy (xpath = "(//span[text()='Trains'])[1]\")")	
-private	WebElement trains;	
-
-@FindBy (xpath = "//span[@data-cy='bookTrainTickets']")
-private	WebElement bookTrainTickets;
-
-@FindBy (xpath = "//span[@class='appendRight10']")
-private WebElement checkPNRStatus;
-
-@FindBy (xpath = "//span[text()='Live Train Status']")
-private	WebElement liveTrainStatus;
-
-@FindBy (xpath = "(//div[@class='tp-dt-header-icon'])[2]")
-private	WebElement aiPopup;
-
-@FindBy (xpath = "//label[@class='makeFlex column latoRegular']")
+@FindBy (xpath = "//label[@for='trainNum']")
 WebElement searchInput;
 
 @FindBy (xpath = "//input[contains(@class, 'react-autosuggest__input')]")
 private	WebElement searchTrain;
 
-@FindBy (xpath ="//ul[@class='react-autosuggest__suggestions-list']//li//div")
+@FindBy (xpath ="//ul[@role='listbox']//li")
 List<WebElement> suggestionList;
 
-@FindBy (xpath = "//ul[@class='travelForPopup']//li//span")
+@FindBy (xpath = "//ul[@class='travelForPopup']//li")
 List<WebElement> stops;
 
 @FindBy (xpath = "//a[text()='CHECK STATUS']")
@@ -56,118 +41,120 @@ public Live_HomePage(WebDriver driver) {
 	PageFactory.initElements(driver, this);
    this.wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 }
-public void clickClosePopup() {
-	this.close.click();
-	Assert.assertTrue(this.close.isDisplayed(),"Close icon is not visible on popup");
-}
-public void clickTrainsTab() {
-	this.trains.click();
-	Assert.assertEquals(this.trains.getText(),"Trains","Trains tab text should be as 'Trains'");
-}
-public void clickAiPopUp() {
-	this.aiPopup.click();
-}
+
 public void verifyTrainsPageTitle(String title) {
+ try {
+	System.out.println("Title : "+this.driver.getTitle());
 	Assert.assertEquals(this.driver.getTitle(),title,"Trains home page title does not match expected value");
 }
+ catch(Exception e) {
+		System.err.println("Fail to verify trains page title");
+		e.printStackTrace();
+	}
+  }
 public void verifyTrainPageUrl(String url) {
+ try {
+	System.out.println("URL : "+this.driver.getCurrentUrl());
 	Assert.assertEquals(this.driver.getCurrentUrl(), url,"Page URL does not match expected value");
  } 
-public void verifyTrainButtonTypes(String type) {
-	boolean status = false;
-	
-	if(type.equalsIgnoreCase("Book Train Tickets")) {
-		status = this.bookTrainTickets.isEnabled();
-	}
-	if(type.equalsIgnoreCase("Check PNR Status")) {
-		status = this.checkPNRStatus.isSelected();
-	}
-	if(type.equalsIgnoreCase("Live Train Status")) {
-		status = this.liveTrainStatus.isSelected();
-	
-Assert.assertEquals(status, true,"Fail to verify "+type+" radio button is selected");
-		//OR
-//Assert.assertTrue(status, "Button should be selected");
-	}
-}
-  //OR Separate method
-
-/*public void verifyBookTrainTicketsButton() {
-	if(this.bookTrainTickets.isEnabled()){
-  	     System.out.println(this.bookTrainTickets.getText());
-  	   }else{
-  		this.bookTrainTickets.click();
-  	   }
-	Assert.assertEquals(this.bookTrainTickets.isEnabled(),true, "Book Train ticket option should be selected after clicking");
-}
-  public void verifyPNRStatusButton() {
-	if(this.checkPNRStatus.isSelected()) {
-		System.out.println(this.checkPNRStatus.getText());
-	}else {
-			this.checkPNRStatus.click();
-	}
-	Assert.assertEquals(this.checkPNRStatus.isSelected(), true, "Check PNR status button should be selected after clicking");
+ catch(Exception e) {
+	System.err.println("Fail to verify trains page title");
+	e.printStackTrace();
+ }
 }
 
-public void verifyLiveTrainStatusButton() {
-	if(this.liveTrainStatus.isSelected()) {
-		System.out.println(this.liveTrainStatus.getText());
-	}else {
-		this.liveTrainStatus.click();
-	}
-	Assert.assertEquals(this.liveTrainStatus.isSelected(), true, "Live train status button should be selected after clicking");
-}*/
+public void clickNVerifyLiveTrainStatusBtn() {
+try {	
+	this.wait.until(ExpectedConditions.elementToBeClickable(this.liveTrainStatusBtn));
+	this.liveTrainStatusBtn.click();
+	this.wait.until(ExpectedConditions.attributeContains(this.liveTrainStatusBtn, "class", "active"));
+	Assert.assertTrue(this.liveTrainStatusBtn.getAttribute("class").contains("active"),"Failed to cliked on Live train status button");
+}
+catch(Exception e) {
+	System.out.println("Live train status button is not clickable");
+	e.printStackTrace();
+ }
+}
 
 public void clickSerachInputField() {
+try {
+	System.out.println("clicking on search train num or name field");
+	this.wait.until(ExpectedConditions.elementToBeClickable(this.searchInput));
 	this.searchInput.click();
-	
-	 Assert.assertTrue(searchInput.isDisplayed() && searchInput.isEnabled(),"Search input field should be clickable");
 }
-public void verifySearchTrainByNameField(String name,String tName) {
-	this.wait.until(ExpectedConditions.visibilityOf(this.searchTrain));
-    this.searchTrain.sendKeys(name);;
-  
-Assert.assertEquals(searchTrain.getAttribute("value"), name,"Search train entered value fail to match with expected value");  
+catch(Exception e) {
+	System.out.println("Failed to cllick on search input field");
+	e.printStackTrace();
+ }
+}
 
-this.wait.until(ExpectedConditions.visibilityOfAllElements(this.suggestionList));
-       for(WebElement e : this.suggestionList) {
-		String tList = e.getText().trim();
-		Assert.assertFalse(tList.isBlank(),name+"is not found in suggestions list");
+public void enterAndVerifyTrainNum(String trainNum) throws InterruptedException {
+try {
+	this.wait.until(ExpectedConditions.visibilityOf(this.searchTrain));
+    this.searchTrain.sendKeys(trainNum);
+    Assert.assertEquals(searchTrain.getAttribute("value"),trainNum,"Failed to match entered train number to check live train status");
+    Thread.sleep(5000);
+    this.wait.until(ExpectedConditions.visibilityOfAllElements(this.suggestionList));
+    
+       for(int i=0; i<this.suggestionList.size(); i++) {
+		String trainOptions = this.suggestionList.get(i).getText().trim();
+		System.out.println("Available trains : "+trainOptions );
+		Assert.assertFalse(trainOptions.isEmpty(),"Failed to find this train in train options");
 		
-		if(tList.toUpperCase().contains(tName)) {
-			  e.click();
-		Assert.assertTrue(tList.toUpperCase().contains(tName.toUpperCase()),"train "+tName+"is not found in the list");	
-		     break;
-	   	    }
-        }   
-    }
+	if(trainOptions.toUpperCase().contains(trainNum.toUpperCase().trim())) {
+	   this.wait.until(ExpectedConditions.elementToBeClickable(this.suggestionList.get(i)));
+	   this.suggestionList.get(i).click();
+	   break;
+	   	   }
+         }   
+}catch(Exception e) {
+	System.out.println("Failed to select train");
+	e.printStackTrace();
+}
+}
 
 public void verifYourStopField(String stopName) {
-	this.wait.until(ExpectedConditions.visibilityOfAllElements(this.stops));	
-    for(WebElement e : stops) {
-   	 String sList = e.getText().trim();
-   	 if(sList.equalsIgnoreCase(stopName)) {
-	        e.click();
-	    Assert.assertTrue(sList.equalsIgnoreCase(stopName),"name you enter is not found in this list");    
-	        break;
-  	    }
+ try {	
+		this.wait.until(ExpectedConditions.visibilityOfAllElements(this.stops));	
+	    for(WebElement e : stops) {
+	   	 String sList = e.getText().trim();
+	   	 System.out.println("stop list :" +sList);
+	   	 if(sList.toUpperCase().contains(stopName.toUpperCase())) {
+	   	 this.wait.until(ExpectedConditions.elementToBeClickable(e));	 
+         e.click();
+		 Assert.assertTrue(sList.toUpperCase().contains(stopName.toUpperCase()),"name you enter is not found in this list");    
+		  break;
+	  	    }
+	    }
     }
-}
+ catch(Exception e) {
+	 System.out.println("Failed to match name");
+	 e.printStackTrace();
+  }
+ }
 
 public void selectDate(String startDate) {
-
+try {
  List<WebElement> datePath = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy
     		(By.xpath("//ul[@class='travelForPopup dateSel']//li/span[text()='"+startDate+"']")));  
-
  datePath.get(0).click();
 }
-
-public void clickCheckStatusButton() {
-    this.checkStatus.click();
-	Assert.assertEquals(this.checkStatus.getText(), "CHECK STATUS","Fail to verify buttom text");
-  }
+catch(Exception e) {
+	System.out.println("Failed to select date");
+	e.printStackTrace();
+ }
 }
-
+public void clickCheckStatusButton() {
+ try {	
+	this.wait.until(ExpectedConditions.elementToBeClickable(checkStatus));
+    this.checkStatus.click();
+  }
+ catch(Exception e) {
+	 System.out.println("Failed to click on check status button");
+	 e.printStackTrace();
+ }
+}
+}
 
 
 

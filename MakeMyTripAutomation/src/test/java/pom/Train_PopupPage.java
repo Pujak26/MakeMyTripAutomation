@@ -14,10 +14,10 @@ import org.testng.Assert;
 public class Train_PopupPage {
 
 @FindBy (xpath = "//img[@alt='minimize']")	
-private	WebElement close;	
+private	WebElement aiPopup;	
 
 @FindBy (xpath = "//span[@data-cy='closeModal']")
-private	WebElement aiPopup;
+private	WebElement loginPopup;
 
 @FindBy (xpath = "//a[contains(@href,'/railways/')]")
 private	WebElement trains;
@@ -46,12 +46,12 @@ public void clickAiPopUp() {
  }
 }	
 
-public void clickClosePopup() {
+public void clickLoginPopup() {
  try {	
 	System.out.println("Zooming out current page");
 	this.js.executeScript("document.body.style.zoom='60%'");
-	this.wait.until(ExpectedConditions.visibilityOf(this.close));
-	this.close.click();
+	this.wait.until(ExpectedConditions.visibilityOf(this.loginPopup));
+	this.loginPopup.click();
  }
  catch(Exception e) {
 	 System.err.println("Failed to close login popup");

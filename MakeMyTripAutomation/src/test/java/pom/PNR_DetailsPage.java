@@ -13,13 +13,13 @@ import org.testng.Assert;
 
 public class PNR_DetailsPage {
 	
-@FindBy (xpath = "//span[@data-cy='closeModal']")
+@FindBy (xpath = "//img[@alt='minimize']")	
 private	WebElement aiPopup;
 
 @FindBy(xpath = "//span[text()='See description of all symbols']")
-private WebElement description ;
+private WebElement descriptionLinkText ;
 
-@FindBy(xpath = "//a[text()='See Coach Positions']")
+@FindBy(xpath = "//a[@data-cy='coachPos']")
 private WebElement coachPositions;
 
 @FindBy(xpath = "//span[@class='close']")
@@ -41,7 +41,7 @@ public void clickAiPopUp() {
  try {	
 		this.wait.until(ExpectedConditions.visibilityOf(this.aiPopup));
 		aiPopup.click();
-		this.js.executeScript("document.body.style.zoom='50%'");
+		this.js.executeScript("arguments[0].scrollIntoView({block: 'center'});", this.descriptionLinkText);
      }
  catch(Exception e) {
 		 System.err.println("Failed to close Ai poopup");
@@ -71,8 +71,10 @@ catch(Exception e) {
 
 public void clickOnDescription() {
  try {	
-	  this.wait.until(ExpectedConditions.elementToBeClickable(this.description));
-	  this.description.click();
+	 this.js.executeScript("document.body.style.zoom='50%'");
+	  this.wait.until(ExpectedConditions.elementToBeClickable(this.descriptionLinkText));
+	  this.descriptionLinkText.click();
+	  System.out.println("Clicked to See description of all symbols linkn text");
 	  }
  catch(Exception e) {
 	 System.out.println("failed to click on description");
@@ -80,13 +82,15 @@ public void clickOnDescription() {
   }
  }
   public void clickOnCoach() {
-	  this.js.executeScript("arguments[0].scrollIntoView(true);",this.coachPositions);
+	  
+	  this.js.executeScript("arguments[0].scrollIntoView(true);", this.coachPositions);
 	  this.wait.until(ExpectedConditions.elementToBeClickable(this.coachPositions));
 	  this.coachPositions.click();
-	//Assert.assertEquals(this.coachPositions.getText(),"See Coach Positions","coachPositions tab text should be as 'See Coach Positions'");
+	  System.out.println("Clicked to See Coach Positions link text");
   }
   public void clickClose() {
 	  this.wait.until(ExpectedConditions.elementToBeClickable(this.coachPositions));
 	  this.closeCoach.click();
+	  System.out.println("Clicked to close coach position popup");
   }
 }

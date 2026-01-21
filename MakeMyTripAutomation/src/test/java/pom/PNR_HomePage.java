@@ -12,26 +12,14 @@ import org.testng.Assert;
 
 public class PNR_HomePage {
 
-@FindBy (xpath = "//span[@class='commonModal__close']")	
-private	WebElement close;
-
-@FindBy (xpath = "(//span[text()='Trains'])[1]")	
-private	WebElement trains;
-
-@FindBy (xpath = "//span[@data-cy='bookTrainTickets']")
-private	WebElement bookTrainTickets;
-
-@FindBy (xpath = "//span[text()='Live Train Status']")
-private WebElement liveTrainStatus;
-
-@FindBy (xpath = "//span[@class='appendRight10']")
-private WebElement checkPNRStatus;
-
-@FindBy (xpath = "(//div[@class='tp-dt-header-icon'])[2]")
-private WebElement aiPopup ;
+@FindBy (xpath = "//span[@data-cy='checkPnrStatus']")
+private WebElement checkPNRStatusBtn;
 
 @FindBy (xpath = "//input[@id='pnr']")
 private	WebElement pnrNumber;
+
+@FindBy (xpath = "(//div[@class='tp-dt-header-icon'])[2]")
+private WebElement aiPopup ;
 
 @FindBy (xpath = "//a[text()='CHECK STATUS']")
 private	WebElement checkStatus;
@@ -65,16 +53,15 @@ public void verifyTrainPageUrl(String url) {
 	e.printStackTrace();
  }
 }
-public void verifyTrainButtonTypes() {
+public void clickNVerifyerifyChkPNRStatusBtn() {
  try {	
-	this.wait.until(ExpectedConditions.elementToBeClickable(this.checkPNRStatus));
-	this.checkPNRStatus.click();
-	this.wait.until(ExpectedConditions.attributeContains(this.checkPNRStatus,"class","active"));
-	 //Assert.assertTrue(this.checkPNRStatus.isSelected(), "Failed to select Check PNR Status button");
-	Assert.assertTrue(this.checkPNRStatus.getAttribute("class").contains("active"), "Failed to select Check PNR Status button");
-		}
+	 this.wait.until(ExpectedConditions.elementToBeClickable(this.checkPNRStatusBtn));
+	 this.checkPNRStatusBtn.click();
+	 this.wait.until(ExpectedConditions.attributeContains(this.checkPNRStatusBtn,"class","active"));
+	 Assert.assertTrue(this.checkPNRStatusBtn.getAttribute("class").contains("active"), "Failed to cliked on Check PNR Status button");
+	  }
  catch(Exception e) {
-	 System.out.println("Failed to select Check PNR Status button");
+	 System.out.println("Failed to clicked on Check PNR Status button");
 	 e.printStackTrace();
  }
 }
@@ -85,21 +72,21 @@ public void enterPnrNumber(String pnrNum){
 	 this.pnrNumber.click();
 	 System.out.println("Sending PNR number to input field");
      this.pnrNumber.sendKeys(pnrNum);
-    Assert.assertTrue(this.pnrNumber.getAttribute("value").contains(pnrNum),"Fail to verify PNR number input field");
- }
+     Assert.assertEquals(this.pnrNumber.getAttribute("value"),pnrNum,"Entered PNR number is mismatched");
+   }
  catch(Exception e) {
-	System.out.println("Failed to enter PNR number");
+	System.out.println("Entered PNR number is mismatched");
 	e.printStackTrace();
  }
 }
 
 public void clickAndVerifyCheckStatusButton() {
- try {	
-	this.checkStatus.click();
-	Assert.assertTrue(this.checkStatus.isSelected(),"Failed to click Check Status button");
-}
+ try {
+	 this.wait.until(ExpectedConditions.elementToBeClickable(this.checkStatus));
+	 this.checkStatus.click();
+	}
  catch(Exception e) {
-	 System.out.println("Failed to click Check Status button");
+	 System.out.println("Failed to click CHECK STATUS button");
 	 e.printStackTrace();
   }
  }

@@ -114,29 +114,27 @@ catch(Exception e) {
 }
 public void verifySourceCity(String enterCity,String expCity) throws InterruptedException {
  try {	
-			this.js.executeScript("document.body.style.zoom='50%'");
-			System.out.println("Clicking search source city field");
-			this.fromCity.click();
-			
-			this.wait.until(ExpectedConditions.visibilityOf(this.searchFromCity));
-			this.searchFromCity.sendKeys(enterCity);
-			
-		    Assert.assertEquals(this.searchFromCity.getAttribute("Value"),enterCity,"Fail to verify enter city search as expected city");
-		    Thread.sleep(5000);
-			this.wait.until(ExpectedConditions.visibilityOfAllElements(this.suggestionList));
+	this.js.executeScript("document.body.style.zoom='50%'");
+	System.out.println("Clicking search source city field");
+	this.fromCity.click();
 	
-		    for(int i = 0; i < this.suggestionList.size(); i++) {
-			
-			String list = suggestionList.get(i).getText().trim();
-			Assert.assertFalse(list.isEmpty(),enterCity +"is not found in suggestions list");     
-			
-		  	if(list.toUpperCase().contains(expCity.toUpperCase().trim())) {
-		  	System.out.println("Source city has been selected from the suggestion list");
-			this.suggestionList.get(i).click();
-		  	      
-		    Assert.assertTrue(list.toUpperCase().contains(expCity.toUpperCase().trim()),"Expected city"+expCity+ "this city is not found in suggestion list");     
-			        break;
-	     }
+	this.wait.until(ExpectedConditions.visibilityOf(this.searchFromCity));
+	this.searchFromCity.sendKeys(enterCity);
+	
+    Assert.assertEquals(this.searchFromCity.getAttribute("Value"),enterCity,"Fail to verify enter city search as expected city");
+    Thread.sleep(5000);
+	this.wait.until(ExpectedConditions.visibilityOfAllElements(this.suggestionList));
+
+    for(int i = 0; i < this.suggestionList.size(); i++) {
+	String list = suggestionList.get(i).getText().trim();
+	Assert.assertFalse(list.isEmpty(),enterCity +"is not found in suggestions list");     
+	
+  	if(list.toUpperCase().contains(expCity.toUpperCase().trim())) {
+	this.suggestionList.get(i).click();
+    Assert.assertTrue(list.toUpperCase().contains(expCity.toUpperCase().trim()),"Expected city"+expCity+ "this city is not found in suggestion list");     
+    System.out.println("Source city has been selected from the suggestion list");    
+    break;
+	   }
 	}
 }
  catch(Exception e) {

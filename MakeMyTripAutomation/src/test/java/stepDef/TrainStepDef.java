@@ -40,7 +40,7 @@ public class TrainStepDef extends DriverFactory {
 		this.train_PopupPage.clickAiPopUp();
 		this.train_PopupPage.verifyTrainsPageTitle(driver.getTitle());
 		this.train_PopupPage.verifyTrainPageUrl(driver.getCurrentUrl());
-		this.train_PopupPage.clickClosePopup();
+		this.train_PopupPage.clickLoginPopup();;
 		}
 	
 	/*@Given ("User login to application using below credentials")
@@ -104,30 +104,24 @@ public class TrainStepDef extends DriverFactory {
 		this.book_HomePage.clickOnSearch();
 	}
 	
-	@When ("User select journey class checkbox from Quick filters")
-	public void select_Journey_class_Checkbox_from_Quick_filters() throws InterruptedException {
+	@When ("User select AC checkbox from quick filter options")
+	public void select_Journey_class_Checkbox_from_Quick_filters() {
 		this.book_TrainSelectPage = new Book_TrainSelectPage(driver);
-		this.book_TrainSelectPage.select2AjourneyFilter();
+		this.book_TrainSelectPage.selectACjourneyFilter();
 		
 		this.book_TrainSelectPage.verifyTrainsPageTitle(driver.getTitle());
 		this.book_TrainSelectPage.verifyTrainPageUrl(driver.getCurrentUrl());
 	}
-	
-	@When ("User select the train which have confirmed options in train options")
-	public void select_Train_from_Suggestions_list() {
-		this.book_TrainSelectPage =  new Book_TrainSelectPage(driver); 
-		this.book_TrainSelectPage.selectTrain();
+	@When ("User select first train from available options having class type {string}")
+	public void select_Train(String type) {
+		this.book_TrainSelectPage = new Book_TrainSelectPage(driver);
+		this.book_TrainSelectPage.selectAnyTrainWithClass(type);
 	}
-	
 	@When ("User click on Add Traveller button")
-	public void click_Add_Traveller_Button() throws InterruptedException {
+	public void click_Add_Traveller_Button() {
 		this.book_TravellerDetailsPage = new Book_TravellerDetailsPage(driver);
-	    this.book_TravellerDetailsPage.addTravellerButton();
-	    
-	    
-	    this.book_TravellerDetailsPage.verifyTrainsPageTitle(driver.getTitle());
-		this.book_TravellerDetailsPage.verifyTrainPageUrl(driver.getCurrentUrl());
-   }
+	    this.book_TravellerDetailsPage.clickToAddTravellerBtn();
+    }
 	@When ("User enter name as {string} in fullName")
 	public void enter_Traveller_Name(String fullName) {
 		this.book_TravellerDetailsPage = new Book_TravellerDetailsPage(driver);
@@ -157,10 +151,11 @@ public class TrainStepDef extends DriverFactory {
 	  this.book_TravellerDetailsPage.clickAddButton();
 	}
 	
-	@When ("User enter contact information")
+	@When ("User enter EmailId as {string} and Mobile Number as {string} in contact information")
 	public void enter_Contact_Information(String Id,String MobNumber) {
-		this.book_TravellerDetailsPage = new Book_TravellerDetailsPage(driver);
-
+	this.book_TravellerDetailsPage = new Book_TravellerDetailsPage(driver);
+	this.book_TravellerDetailsPage.verifyTrainsPageTitle(driver.getTitle());
+	this.book_TravellerDetailsPage.verifyTrainPageUrl(driver.getCurrentUrl());
 	this.book_TravellerDetailsPage.enterEmailAndMobile(Id, MobNumber);
 	}
 	
@@ -174,9 +169,10 @@ public class TrainStepDef extends DriverFactory {
 	 public void close() throws InterruptedException  {
 		this.train_PopupPage = new Train_PopupPage(driver);
 		this.train_PopupPage.clickAiPopUp();
+		
 		this.train_PopupPage.verifyTrainsPageTitle(driver.getTitle());
 		this.train_PopupPage.verifyTrainPageUrl(driver.getCurrentUrl());
-		this.train_PopupPage.clickClosePopup();
+		this.train_PopupPage.clickLoginPopup();
 		}
 	
 	/*@Given ("User login to application using below credentials")
@@ -200,7 +196,7 @@ public class TrainStepDef extends DriverFactory {
 	@Given("User click on Check PNR Status button")
 	public void click_Check_PNR_Status_Button() {
 		this.pnr_HomePage = new PNR_HomePage(driver);
-		this.pnr_HomePage.verifyTrainButtonTypes();
+		this.pnr_HomePage.clickNVerifyerifyChkPNRStatusBtn();
 		
 		this.pnr_HomePage.verifyTrainsPageTitle(driver.getTitle());
 		this.pnr_HomePage.verifyTrainPageUrl(driver.getCurrentUrl());
@@ -219,10 +215,11 @@ public class TrainStepDef extends DriverFactory {
 		this.pnr_HomePage.clickAndVerifyCheckStatusButton();
 	}
 	
-	@When ("And User handle the Ai Popup")
+	@When ("User handle the Ai Popup")
 	public void dismiss_Ai_popup() {
 		this.pnr_DetailsPage = new  PNR_DetailsPage(driver);
 		this.pnr_DetailsPage.clickAiPopUp();
+		
 		this.pnr_DetailsPage.verifyTrainsPageTitle(driver.getTitle());
 		this.pnr_DetailsPage.verifyTrainPageUrl(driver.getCurrentUrl());
 	}
@@ -243,13 +240,14 @@ public class TrainStepDef extends DriverFactory {
 		this.pnr_DetailsPage = new PNR_DetailsPage(driver);
 	    this.pnr_DetailsPage.clickClose();
  }
+	
 	@Given ("User select on close icon on popup")
 	public void select_closed() {
 		this.train_PopupPage = new Train_PopupPage(driver);
 		this.train_PopupPage.clickAiPopUp();
 		this.train_PopupPage.verifyTrainsPageTitle(driver.getTitle());
 		this.train_PopupPage.verifyTrainPageUrl(driver.getCurrentUrl());
-		this.train_PopupPage.clickClosePopup();
+		this.train_PopupPage.clickLoginPopup();
 		}
 
 	/*@Given ("User login to application using below credentials")
@@ -270,20 +268,14 @@ public class TrainStepDef extends DriverFactory {
 		
 		}
 	
-	@Given ("User vanish Ai popup")
-	public void vanish_Ai_Popup() {
-		this.live_HomePage = new Live_HomePage(driver);
-		this.live_HomePage.clickAiPopUp();
-		
-		this.live_HomePage.verifyTrainsPageTitle(driver.getTitle());
-		this.live_HomePage.verifyTrainPageUrl(driver.getCurrentUrl());;
+	@Given ("User click on live train status button")
+	public void live_Train_Status() {
+	  this.live_HomePage = new Live_HomePage(driver);
+	  this.live_HomePage.clickNVerifyLiveTrainStatusBtn();
+	  
+	  this.live_HomePage.verifyTrainsPageTitle(driver.getTitle());
+	  this.live_HomePage.verifyTrainPageUrl(driver.getCurrentUrl());
 	}
-		
-	@Given ("User click on {string}")
-	public void live_Train_Status(String type) {
-	 this.live_HomePage = new Live_HomePage(driver);
-	 this.live_HomePage.verifyTrainButtonTypes(type);
-		}
 	
 	@When ("User click on search train input field")
 	public void click_Search_Train() {
@@ -291,10 +283,10 @@ public class TrainStepDef extends DriverFactory {
 	    this.live_HomePage.clickSerachInputField();
 	}
 	
-	@When ("User enter valid Train Name as {string} and select matched train {string}")
-	public void enter_and_select_Train (String name , String tName) {
+	@When ("User enter valid Train Number as {string}")
+	public void enter_and_select_Train (String tNumber) throws InterruptedException  {
 		this.live_HomePage = new Live_HomePage(driver);
-		this.live_HomePage.verifySearchTrainByNameField(name, tName);
+		this.live_HomePage.enterAndVerifyTrainNum(tNumber);
 	}
 	
 	@When ("User select Your Stop as {string} from dropdown")
@@ -309,18 +301,19 @@ public class TrainStepDef extends DriverFactory {
 		this.live_HomePage.selectDate(startDate);
 	}
 	
-	@Then ("User click on Check Status Button")
+	@When ("User click on Check Status Button")
 	public void click_Check_Status() {
 		this.live_HomePage = new Live_HomePage(driver);
 		this.live_HomePage.clickCheckStatusButton();
 	}
 	
 	@Then ("User closed ai Popup")
-	public void click_ai_Popup() {
+	public void click_ai_Popup() throws InterruptedException {
+		 this.live_StatusPage.verifyTrainsPageTitle(driver.getTitle());
+		 this.live_StatusPage.verifyTrainPageUrl(driver.getCurrentUrl());
+		  
 		this.live_StatusPage = new Live_StatusPage(driver);
 	    this.live_StatusPage.clickAiPopUp();
-	    
-	    this.live_StatusPage.verifyTrainsPageTitle(driver.getTitle());
-	    this.live_StatusPage.verifyTrainPageUrl(driver.getCurrentUrl());
+
     }
 }
