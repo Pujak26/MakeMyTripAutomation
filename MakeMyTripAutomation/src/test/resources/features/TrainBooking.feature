@@ -4,14 +4,14 @@ Scenario: Verify user can book train tickets.
 Given User click on popup
 #And User login to application using below credentials
 And User select on Trains option
-And User click on "Book Train Tickets" option
+And User click on Book Train Tickets option
 When User click and enter "Pune" as a source city and select matched city "PUNE"
 And User enter "Nagpur" as a destination city and select matched city "NGP" 
-And User select the travel date 9 days from today
+And User select the travel date 12 days from today
 And User select the travel class as "All Class" 
 And User click on search button
 And User select AC checkbox from quick filter options
-And User select first train from available options having class type "2A" 
+And User select train from available option "3A" 
 And User click on Add Traveller button
 And User enter name as "Prisha" in fullName
 And User enter age as "10" completeAge

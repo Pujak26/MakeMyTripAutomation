@@ -20,12 +20,6 @@ public class Book_HomePage {
 @FindBy (xpath = "//span[@data-cy='bookTrainTickets']")
 private	WebElement bookTrainTickets;
 
-@FindBy (xpath = "//span[@class='appendRight10']")
-private WebElement checkPNRStatus;
-
-@FindBy (xpath = "//span[text()='Live Train Status']")
-private WebElement liveTrainStatus;
-
 @FindBy (css = "#fromCity")
 private	WebElement fromCity;
 
@@ -96,59 +90,57 @@ public void verifyTrainPageUrl(String url) {
 	e.printStackTrace();
 }
 }
-public void verifyTrainButtonTypes(String type) {
-try {
-	this.js.executeScript("document.body.style.zoom='60%'");
-	System.out.println("Selecting the radio button");
-	boolean status = false;
-	if(type.equalsIgnoreCase("Book Train Tickets")) {
-		status = this.bookTrainTickets.isEnabled();
-		System.out.println("Book Train Tickets button is selected");
-	}
-	 Assert.assertTrue(status, "Button should be selected");
-	}
-catch(Exception e) {
-	System.err.println("Failed to select Book Train Tickets button");
-		e.printStackTrace();
-   }
+
+public void clickNVerifyBookTrainTicketBtn() {
+ try {	
+	this.wait.until(ExpectedConditions.elementToBeClickable(this.bookTrainTickets));
+	this.bookTrainTickets.click();
+	this.wait.until(ExpectedConditions.attributeContains(bookTrainTickets, "class","active"));
+	Assert.assertTrue(this.bookTrainTickets.getAttribute("class").contains("active"),"Failed to cliked on Book Train ticket button");
+ }catch(Exception e) {
+	 System.out.println("Fail to click on button");
+	 e.printStackTrace();
+ }
 }
 public void verifySourceCity(String enterCity,String expCity) throws InterruptedException {
- try {	
-	this.js.executeScript("document.body.style.zoom='50%'");
-	System.out.println("Clicking search source city field");
-	this.fromCity.click();
-	
-	this.wait.until(ExpectedConditions.visibilityOf(this.searchFromCity));
-	this.searchFromCity.sendKeys(enterCity);
-	
-    Assert.assertEquals(this.searchFromCity.getAttribute("Value"),enterCity,"Fail to verify enter city search as expected city");
-    Thread.sleep(5000);
-	this.wait.until(ExpectedConditions.visibilityOfAllElements(this.suggestionList));
+try {	
+		this.js.executeScript("document.body.style.zoom='50%'");
+		System.out.println("Clicking search source city field");
+		this.fromCity.click();
+		
+		this.wait.until(ExpectedConditions.visibilityOf(this.searchFromCity));
+		this.searchFromCity.sendKeys(enterCity);
+		
+	    Assert.assertEquals(this.searchFromCity.getAttribute("value"),enterCity,"Fail to verify enter city search as expected city");
+	    Thread.sleep(3000);
+		this.wait.until(ExpectedConditions.visibilityOfAllElements(this.suggestionList));
 
-    for(int i = 0; i < this.suggestionList.size(); i++) {
-	String list = suggestionList.get(i).getText().trim();
-	Assert.assertFalse(list.isEmpty(),enterCity +"is not found in suggestions list");     
-	
-  	if(list.toUpperCase().contains(expCity.toUpperCase().trim())) {
-	this.suggestionList.get(i).click();
-    Assert.assertTrue(list.toUpperCase().contains(expCity.toUpperCase().trim()),"Expected city"+expCity+ "this city is not found in suggestion list");     
-    System.out.println("Source city has been selected from the suggestion list");    
-    break;
-	   }
+	    for(int i = 0; i < this.suggestionList.size(); i++) {
+		String list = suggestionList.get(i).getText().trim();
+		Assert.assertFalse(list.isEmpty(),enterCity +"is not found in suggestions list");     
+		
+	  	if(list.toUpperCase().contains(expCity.toUpperCase().trim())) {
+		this.suggestionList.get(i).click();
+	    Assert.assertTrue(list.toUpperCase().contains(expCity.toUpperCase().trim()),"Expected city"+expCity+ "this city is not found in suggestion list");     
+	    System.out.println("Source city has been selected from the suggestion list");    
+	    break;
+		   }
+		}
 	}
-}
- catch(Exception e) {
-	System.err.println("Failed to enter and select source city");
-	e.printStackTrace();
-  }
-}
+catch(Exception e) {
+		System.err.println("Failed to enter and select source city");
+		e.printStackTrace();
+	  }
+	}
+
+
 	
 public void verifyToCity(String enterCity,String expCity) throws InterruptedException {
  try {	
 	this.wait.until(ExpectedConditions.visibilityOf(this.searchToCity));
 			this.searchToCity.sendKeys(enterCity);
 		    Assert.assertEquals(this.searchToCity.getAttribute("value"),enterCity,"Fail to verify enter city match with expected");
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 			
 			this.wait.until(ExpectedConditions.visibilityOfAllElements(this.suggestionList));
 			for(int i=0; i<this.suggestionList.size(); i++) {

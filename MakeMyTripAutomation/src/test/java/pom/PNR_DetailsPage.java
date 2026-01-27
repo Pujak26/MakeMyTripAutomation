@@ -83,7 +83,7 @@ public void clickOnDescription() {
  }
   public void clickOnCoach() {
 	  
-	  this.js.executeScript("arguments[0].scrollIntoView(true);", this.coachPositions);
+	  this.js.executeScript("arguments[0].scrollIntoView({block:'center'});", this.coachPositions);
 	  this.wait.until(ExpectedConditions.elementToBeClickable(this.coachPositions));
 	  this.coachPositions.click();
 	  System.out.println("Clicked to See Coach Positions link text");

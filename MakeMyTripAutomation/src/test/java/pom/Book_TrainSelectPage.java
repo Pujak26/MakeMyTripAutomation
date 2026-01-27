@@ -2,6 +2,7 @@ package pom;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -21,7 +22,7 @@ private	List<WebElement> filters;
 @FindBy (xpath = "//p[text()='AC']")
 private WebElement AC;
 
-@FindBy (xpath = "//p[text()='2A']")
+@FindBy (xpath = "//div[@data-testid='card-wrapper']")
 private	List<WebElement> classType;
 
 @FindBy (xpath = "//span[text()='Book Now']")
@@ -52,28 +53,51 @@ public void selectACjourneyFilter()  {
 	 System.out.println("failed to select  AC Checkbox");
  }
 }
-public void selectAnyTrainWithClass(String type) {
+public boolean selectAnyTrainWithClass(String type) {
 
- boolean matchFound = false;
- 
-	for (WebElement btn : classType) {
-	try {
-	      if (!btn.isEnabled() || btn.getAttribute("class").contains("disabled")) {
-	      continue; 
-	 }
-	  this.js.executeScript("arguments[0].scrollIntoView({block: 'center'});", btn);
-	  this.wait.until(ExpectedConditions.elementToBeClickable(btn));
-       btn.click();
-       System.out.println("Success: Selected specific train with class " + classType);
-       matchFound = true;
-       Assert.assertTrue(matchFound,"Fail to select train");
-        break;
-  } 
-  catch (Exception e) {
-	System.err.println("Failed to find the train having class type 2A");
+	 WebElement bestOption = null;
+	 int bestPriority = Integer.MAX_VALUE;
+   
+	for (WebElement card : classType) {
+	
+	String cardText = card.getText().replaceAll("\\s+", " ").trim().toUpperCase();
+	
+	 if (isCardDisabled(card)) continue;
+     if (!cardText.contains(type.toUpperCase())) continue;
+     if (cardText.contains("Booking not allowed")) continue;
+	
+     int priority = getACBookingPriority(cardText);
+     if (priority < bestPriority)
+        {
+         bestPriority = priority;
+         bestOption = card;
+         }
+     }
+    if (bestOption == null)
+    {
+        return false;
     }
-  }
+
+    scrollAndClick(bestOption);
+    return true;
 }
+	 private boolean isCardDisabled(WebElement card) {
+	        return !card.isEnabled() ||card.getAttribute("class").contains("disabled");
+	   }
+
+	    private int getACBookingPriority(String text) {
+	        if (text.contains("PQWL")) return 1;
+	        if (text.contains("GNWL")) return 2;
+	        if (text.contains("RLWL")) return 3;
+	        return Integer.MAX_VALUE;
+	    }
+	    private void scrollAndClick(WebElement element) {
+	        js.executeScript("arguments[0].scrollIntoView({block:'center'});", element);
+	        wait.until(ExpectedConditions.elementToBeClickable(element));
+	        element.click();
+	        System.out.println("Selected train details :"+ element.getText());
+	    }
+
 public void verifyTrainsPageTitle(String title) {
  try {
 	System.out.println("Title : "+this.driver.getTitle());
