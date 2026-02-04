@@ -133,8 +133,6 @@ catch(Exception e) {
 	  }
 	}
 
-
-	
 public void verifyToCity(String enterCity,String expCity) throws InterruptedException {
  try {	
 	this.wait.until(ExpectedConditions.visibilityOf(this.searchToCity));

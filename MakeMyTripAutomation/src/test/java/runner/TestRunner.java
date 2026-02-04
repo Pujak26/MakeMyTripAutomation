@@ -7,10 +7,11 @@ import io.cucumber.testng.CucumberOptions;
 
 	 features = "src\\test\\resources\\features",  //path to feature file
 	 glue = {"stepDef","hooks"},
-     plugin = {"pretty","html:target/cucumber-report.html"},
-     monochrome = true
-     
-	)
+		        plugin = {
+		                "pretty",
+		                "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
+		        }
+ 	)
 public class TestRunner extends AbstractTestNGCucumberTests{
 	
 
